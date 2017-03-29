@@ -1,4 +1,5 @@
 #include "initialisation_wilson.h"
+#include <string.h>
 
 // pas declarer
 
@@ -37,7 +38,6 @@ void fnc_remplir_une_structure(string la_ligne, Produit *adr_produit){
     istringstream ligne_a_parser(la_ligne);
     string delimiter = ";";
     size_t pos = 0;
-
 
     //Produit
     pos = la_ligne.find(delimiter);
@@ -104,7 +104,6 @@ void fnc_remplir_une_structure(string la_ligne, Produit *adr_produit){
     pos = la_ligne.find(delimiter);
     adr_produit->tauxRupture=stof(la_ligne.substr(0, pos));
     la_ligne.erase(0, pos + delimiter.length());
-
 
 }
 
@@ -312,5 +311,10 @@ Produit choix_du_meilleur_voisin(Produit *tab_options)
 
 
 
+
+void afficher_un_produits( Produit *a_afficher)
+{
+    cout << a_afficher->nom <<";"<<a_afficher->stockAlerte << ";" << a_afficher->quantiteCommande << endl;
+}
 
 

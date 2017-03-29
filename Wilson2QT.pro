@@ -25,3 +25,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 HEADERS += \
     initialisation_wilson.h
+
+DISTFILES += \
+    ../donneesventes.csv

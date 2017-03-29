@@ -72,4 +72,7 @@ void generer_le_tabou (Produit *ptr_produit);
 Produit choix_du_meilleur_voisin(Produit *tab_options);
 
 
+void afficher_un_produits( Produit *a_afficher);
+
+
 #endif // INITIALISATION_WILSON_H_INCLUDED

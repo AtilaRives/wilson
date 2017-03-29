@@ -19,7 +19,7 @@ int main()
     int i_cpt_nb_ligne =0;
    // int i_nombre_donnes=0;
 
-    ifstream fichier_donees(url_donnees, ios::in);  // on ouvre le fichier en lecture
+    ifstream fichier_donees("c:\\Users\\atila\\Documents\\donneesventes.csv", ios::in);  // on ouvre le fichier en lecture
 
     if(!fichier_donees)
     {
@@ -28,11 +28,10 @@ int main()
 
 
     //lire le nombres d'elements
-    while(!getline(fichier_donees, buffer_de_ligne))
+    while(getline(fichier_donees, buffer_de_ligne))
     {
         i_cpt_nb_ligne++;
     }
-
     //creation du tableau d'elements
     Produit tab_produits[i_cpt_nb_ligne]; //on nb_ligne-1 élèments (la 1er ligne n'est pas un produit)
 
@@ -46,9 +45,10 @@ int main()
     getline(fichier_donees, buffer_de_ligne);
 
     //on remplit nos structures
-    while(!getline(fichier_donees, buffer_de_ligne))
+    while(getline(fichier_donees, buffer_de_ligne))
     {
         fnc_remplir_une_structure(buffer_de_ligne, &tab_produits[i_cpt_nb_ligne]);
+        i_cpt_nb_ligne++;
     }
     //fermer le fichier
         fichier_donees.close();
@@ -58,6 +58,11 @@ int main()
         innitialisation_un_produit_quantite_stock_alerte(&tab_produits[i]);
 
     }
+
+    for (int i= 0; i<NB_PRODUITS;i++)
+        {
+            afficher_un_produits( &tab_produits[i]);
+        }
 
 
 
