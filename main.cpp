@@ -59,14 +59,31 @@ int main()
 
     }
 
+//    for (int i= 0; i<NB_PRODUITS;i++)
+//    {
+//        afficher_un_produits( &tab_produits[i]);
+//    }
+
+
+    //generer recuit
+    float *temperature;
+    temperature = new float;
+    *temperature = TEMPERATURE_INNITIALE;
+
+
+    for(int i = 0; i<NB_PRODUITS ; i++)
+    {
+        cout << " dans la boucle de generation" <<endl;
+        (*temperature)=TEMPERATURE_INNITIALE;
+        generer_le_recuit(&tab_produits[i], temperature, TEMPERATURE_VARIATION);
+    }
     for (int i= 0; i<NB_PRODUITS;i++)
-        {
-            afficher_un_produits( &tab_produits[i]);
-        }
+    {
+        afficher_un_produits( &tab_produits[i]);
+    }
 
 
-
-        //ecrire fichier resultat
+    //ecrire fichier resultat
 
 
     //tableau de structure

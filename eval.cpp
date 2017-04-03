@@ -1,3 +1,7 @@
+#include "eval.h"
+
+
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -17,31 +21,7 @@
 #define NOVEMBRE 239
 #define DECEMBRE 260
 
-using namespace std;
 
-typedef struct Produit Produit;
-struct Produit {
-	string nom;
-	string categorie;
-
-	int stockDepart;
-
-	int demandeMoyenne;
-	double croissanceJournaliere;
-	int moisSaisonnalite;
-	double variationSaisonnalite;
-	int variationDemandeJournaliere;
-
-	int delaiLivraison;
-	int coutLancement;
-
-	double tauxPossession;
-	int prixAchat;
-	double tauxRupture;
-
-	int stockAlerte;
-	int quantiteCommande;
-};
 
 double evaluation(Produit* produitActuel, const int stockAlerte, const int quantiteCommande) {
 	int joursOuvres = 261;
@@ -188,25 +168,3 @@ double evaluation(Produit* produitActuel, const int stockAlerte, const int quant
 	return coutTotal;
 }
 
-void main() {
-	
-	Produit test;
-
-	test.demandeMoyenne = 341;
-	test.variationDemandeJournaliere = 9;
-	test.croissanceJournaliere = 1;
-	test.moisSaisonnalite = 7;
-	test.variationSaisonnalite = -0.19;
-	test.stockDepart = 4081;
-	test.coutLancement = 276;
-	test.prixAchat = 3;
-	test.delaiLivraison = 5;
-	test.tauxPossession = 0.2;
-	test.tauxRupture = 0.5;
-
-	srand(time(NULL));
-
-	for (int i = 0; i < 11; i++) {
-		cout << "Cout total : " << evaluation(&test, 2980, 1460) << endl;
-	}
-}

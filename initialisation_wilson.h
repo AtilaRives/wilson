@@ -25,8 +25,10 @@ using namespace std;
 
 #define NB_PRODUITS 160
 #define TEMPERATURE_INNITIALE 500
-#define TAILLE_TAB_SOLUTION 3
+#define TEMPERATURE_VARIATION 0.5
 #define TEMPERATURE_ARRET 0.1
+#define TAILLE_TAB_SOLUTION 3
+
 
 /*
 Produit;Categorie;Stock_de_depart;Demande_d1;Croissance_par_jour;Mois_de_saisonnalite;

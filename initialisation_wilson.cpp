@@ -3,11 +3,6 @@
 
 // pas declarer
 
-double evaluation(Produit* produitActuel, const int stockAlerte, const int quantiteCommande){
-    produitActuel->quantiteCommande = stockAlerte;
-    produitActuel->quantiteCommande = quantiteCommande;
-    return 0;
-}
 
 Produit successeurTabou (Produit *truc){
     Produit plop = *truc;
@@ -224,8 +219,8 @@ void generer_resultat(Produit *tab_produit, const string mixte_recuit_tabou){
     {
         for(int i = 0; i<NB_PRODUITS ; i++)
         {
-
-            generer_le_recuit(&tab_produit[i], temperature, TEMPERATURE_ARRET);
+            (*temperature)=TEMPERATURE_INNITIALE;
+            generer_le_recuit(&tab_produit[i], temperature, TEMPERATURE_VARIATION);
         }
         ecrire_resultat(tab_produit, "recuit");
 
@@ -234,7 +229,7 @@ void generer_resultat(Produit *tab_produit, const string mixte_recuit_tabou){
         for(int i = 0; i<NB_PRODUITS ; i++)
         {
             (*temperature)=TEMPERATURE_INNITIALE;
-             generer_le_mixte(&tab_produit[i], temperature, TEMPERATURE_ARRET);
+             generer_le_mixte(&tab_produit[i], temperature, TEMPERATURE_VARIATION);
         }
         ecrire_resultat(tab_produit, "mixte");
     }else
