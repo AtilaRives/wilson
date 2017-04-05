@@ -1,0 +1,4 @@
+﻿  eval.cpp
+c:\users\milan-pc\desktop\projet_optimisation\projet_optimisation\eval.cpp(4): warning C4244: 'argument' : conversion de 'time_t' en 'unsigned int', perte possible de données
+  Projet_Optimisation.vcxproj -> C:\Users\Milan-PC\Desktop\Projet_Optimisation\Debug\Projet_Optimisation.exe
+  Projet_Optimisation.vcxproj -> C:\Users\Milan-PC\Desktop\Projet_Optimisation\Debug\Projet_Optimisation.pdb (Full PDB)
