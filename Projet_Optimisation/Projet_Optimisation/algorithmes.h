@@ -4,3 +4,5 @@
 
 // Recuit simulé
 Etat* recuitSimule(Produit* produitActuel);
+
+Etat* tabou(Produit* produitActuel);

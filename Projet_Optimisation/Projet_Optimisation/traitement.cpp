@@ -73,19 +73,14 @@ void initialisationStructure(string ligne, Produit* produitActuel) {
 }
 
 // Récupération d'un voisin de l'état actuel
-vector<Etat>* voisins(const Etat etatActuel, const int variation) {
-	vector<Etat>* retour = new vector<Etat>;
+Etat* voisin(const Etat etatActuel, const int variation) {
+	Etat* retour = new Etat;
 
-	for (int i = (-1 * variation); i < (variation + 1); i++) {
-		for (int j = (-1 * variation); j < (variation + 1); j++) {
-			if (i != 0 || j != 0) {
-				Etat nouveauVoisin;
-				nouveauVoisin.quantiteCommande = etatActuel.quantiteCommande + etatActuel.quantiteCommande * (i / 100.0);
-				nouveauVoisin.stockAlerte = etatActuel.stockAlerte + etatActuel.stockAlerte * (j / 100.0);
-				retour->push_back(nouveauVoisin);
-			}
-		}
-	}
+	int alea = rand() % (variation - (-1 * variation)) + (-1 * variation);
+	retour->quantiteCommande = etatActuel.quantiteCommande + etatActuel.quantiteCommande * (alea / 100.0);
+
+	alea = rand() % (variation - (-1 * variation)) + (-1 * variation);
+	retour->stockAlerte = etatActuel.stockAlerte + etatActuel.stockAlerte * (alea / 100.0);
 
 	return retour;
 }

@@ -2,57 +2,94 @@
 
 // Recuit simulé
 Etat* recuitSimule(Produit* produitActuel) {
-	Etat* etatInitial = new Etat;
-	etatInitial->quantiteCommande = produitActuel->demandeMoyenne * produitActuel->delaiLivraison;
-	etatInitial->stockAlerte = etatInitial->quantiteCommande * 3;
+	Etat* etatMeilleur= new Etat;
+	etatMeilleur->quantiteCommande = produitActuel->demandeMoyenne * produitActuel->delaiLivraison;
+	etatMeilleur->stockAlerte = etatMeilleur->quantiteCommande * 3;
+	
+	int nombreTests = 10;
+
+	double pireEvalMeilleur = evaluation(produitActuel, *etatMeilleur);
+	for (int i = 0; i < nombreTests; i++) {
+		double evalTest = evaluation(produitActuel, *etatMeilleur);
+		if (evalTest > pireEvalMeilleur) {
+			pireEvalMeilleur = evalTest;
+		}
+	}
 	
 	Etat* etatRetour = new Etat;
 	etatRetour->quantiteCommande = produitActuel->demandeMoyenne * produitActuel->delaiLivraison;
-	etatRetour->stockAlerte = etatRetour->quantiteCommande * 3;
+	etatRetour->stockAlerte = etatRetour->quantiteCommande * 2;
 
-	int temperature = produitActuel->stockDepart * 10;
-	int variationTemp = 1;
+	double temperature = etatRetour->quantiteCommande * 3;
+	double temperatureMin = 1;
+	double variationTemp = 1;
 
-	int nombreTests = 10;
+	
 
-	float alea_K;
-	float bolzman = 0;
+	double r = 0.0;
+	double bolzman = 0.0;
 
-	double eval_ancien = evaluation(produitActuel, *etatRetour);
-	double pireEval = 0.0;
-
-	do {
-		// Choix d'un voisin aléatoirement dans tous les voisins
-		vector<Etat>* voisinsTrouves;
-		voisinsTrouves = voisins(*etatRetour, 10);
-		int random = rand() % voisinsTrouves->size();
-		etatRetour = &voisinsTrouves->at(random);
-		//
-
-		// Evaluation du voisin trouvé x fois
-		pireEval = evaluation(produitActuel, *etatRetour);
-		for (int i = 0; i < nombreTests; i++) {
-			double evalTest = evaluation(produitActuel, *etatRetour);
-			if (evalTest > pireEval) {
-				pireEval = evalTest;
-			}
+	// Evaluation du voisin trouvé x fois
+	double pireEvalAncien = evaluation(produitActuel, *etatRetour);
+	for (int i = 0; i < nombreTests; i++) {
+		double evalTest = evaluation(produitActuel, *etatRetour);
+		if (evalTest > pireEvalAncien) {
+			pireEvalAncien = evalTest;
 		}
-		//
+	}
+	//
 
-		bolzman = (exp(-(eval_ancien - pireEval) / temperature));
+	double pireEval = 0.0;
+	int cpt = 0;
 
-		alea_K = (float)rand() / RAND_MAX;
+	while (temperature > temperatureMin) {
+			// Choix d'un voisin aléatoirement dans tous les voisins
+			Etat* nouveauVoisin = voisin(*etatRetour, 5);
+			//
 
+			// Evaluation du voisin trouvé x fois
+			pireEval = evaluation(produitActuel, *nouveauVoisin);
+			for (int i = 0; i < nombreTests; i++) {
+				double evalTest = evaluation(produitActuel, *nouveauVoisin);
+				if (evalTest > pireEval) {
+					pireEval = evalTest;
+				}
+			}
+			//
+
+			r = (double)rand() / RAND_MAX;
+
+			double temp = pireEvalAncien;
+			double erreur = pireEvalAncien - pireEval;
+
+			if (erreur > 0) {
+				etatRetour = nouveauVoisin;
+				pireEvalAncien = pireEval;
+				
+				if (pireEval < pireEvalMeilleur) {
+					etatMeilleur = nouveauVoisin;
+					pireEvalMeilleur = pireEval;
+				}
+			}
+			else {
+				bolzman = exp(erreur / temperature);
+				if (bolzman > r) {
+					etatRetour = nouveauVoisin;
+					pireEvalAncien = pireEval;
+				}
+			}
+			//cout << " Ancien etat : " << temp << " nouvel etat : " << pireEval << " erreur : " << erreur << " temperature : " << temperature << " bolzman : " << bolzman << endl;
 		temperature = temperature - variationTemp;
 
-	} while (bolzman > alea_K && (temperature <= variationTemp));
-
-	cout << produitActuel->nom << " : " << pireEval << endl;
-
-	//si rien n'a été trouvé, renvoyer le "couple de donnée" initial
-	if (temperature <= variationTemp) {
-		return etatInitial;
+		cpt++;
 	}
 
-	return etatRetour;
+	cout << produitActuel->nom << " : " << pireEval << " cpt : " << cpt << endl;
+
+	return etatMeilleur;
+}
+
+// Tabou
+Etat* tabou(Produit* produitActuel) {
+	return NULL;
 }

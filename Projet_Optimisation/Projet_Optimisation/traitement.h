@@ -13,7 +13,7 @@ void initialisationStructure(string ligne, Produit* produitActuel);
 // variation : pourcentage de variation de la quantité et du stock
 // quantiteNouv : quantite du voisin trouvé
 // stockNouv : stock du voisin trouvé
-vector<Etat>* voisins(const Etat etatActuel, const int variation);
+Etat* voisin(const Etat etatActuel, const int variation);
 
 // Evaluation de l'état donné
 // produitActuel : produit sur lequel on va évaluer l'état

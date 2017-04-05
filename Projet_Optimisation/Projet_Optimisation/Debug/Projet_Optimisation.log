@@ -1,4 +1,3 @@
 ﻿  algorithmes.cpp
-c:\users\milan-pc\desktop\projet_optimisation\projet_optimisation\algorithmes.cpp(42): warning C4244: '=' : conversion de 'double' en 'float', perte possible de données
   Projet_Optimisation.vcxproj -> C:\Users\Milan-PC\Desktop\Projet_Optimisation\Debug\Projet_Optimisation.exe
   Projet_Optimisation.vcxproj -> C:\Users\Milan-PC\Desktop\Projet_Optimisation\Debug\Projet_Optimisation.pdb (Full PDB)
