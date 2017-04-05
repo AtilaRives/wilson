@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <vector>
 
@@ -45,6 +46,7 @@ struct Produit {
 
 typedef struct Etat Etat;
 struct Etat {
+	string nom;
 	int stockAlerte;
 	int quantiteCommande;
 };

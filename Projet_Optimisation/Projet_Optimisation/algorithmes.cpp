@@ -10,8 +10,8 @@ Etat* recuitSimule(Produit* produitActuel) {
 	etatRetour->quantiteCommande = produitActuel->demandeMoyenne * produitActuel->delaiLivraison;
 	etatRetour->stockAlerte = etatRetour->quantiteCommande * 3;
 
-	int temperature = 5000;
-	int variationTemp = 10;
+	int temperature = produitActuel->stockDepart * 10;
+	int variationTemp = 1;
 
 	int nombreTests = 10;
 
@@ -24,7 +24,7 @@ Etat* recuitSimule(Produit* produitActuel) {
 	do {
 		// Choix d'un voisin aléatoirement dans tous les voisins
 		vector<Etat>* voisinsTrouves;
-		voisinsTrouves = voisins(*etatRetour, 15);
+		voisinsTrouves = voisins(*etatRetour, 10);
 		int random = rand() % voisinsTrouves->size();
 		etatRetour = &voisinsTrouves->at(random);
 		//
@@ -47,7 +47,7 @@ Etat* recuitSimule(Produit* produitActuel) {
 
 	} while (bolzman > alea_K && (temperature <= variationTemp));
 
-	cout << "eval : " << pireEval << endl;
+	cout << produitActuel->nom << " : " << pireEval << endl;
 
 	//si rien n'a été trouvé, renvoyer le "couple de donnée" initial
 	if (temperature <= variationTemp) {
